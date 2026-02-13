@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Warung Sembako</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+/* RESET */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+body { color:#333; line-height:1.6; scroll-behavior: smooth; }
+
+/* HEADER */
+header {
+    background-color: #4CAF50;
+    color: white;
+    position: sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 4px 6px rgba(0,0,0,0.1);
+    transition: background 0.3s;
+}
+header.scrolled { background-color:#45a049; }
+header .container {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 20px;
+    max-width:1200px;
+    margin:auto;
+}
+.logo { font-size:1.8rem; font-weight:bold; letter-spacing:1px; }
+nav ul { list-style:none; display:flex; gap:25px; transition:right 0.3s ease-in-out; }
+nav a { color:white; text-decoration:none; font-weight:500; transition: all 0.3s ease; }
+nav a:hover { color:#ffe4c4; transform:scale(1.1); }
+.hamburger { display:none; font-size:1.5rem; cursor:pointer; color:white; }
+
+/* HERO */
+.hero {
+    height:80vh;
+    background-color:#90ee90;
+    display:flex; align-items:center; justify-content:center; text-align:center; color:#fff; position:relative; overflow:hidden;
+}
+.hero-text {
+    position:relative; z-index:2;
+    opacity:0; transform:translateY(30px);
+    animation: fadeInUp 1s forwards;
+}
+.hero-text h2 { font-size:2.5rem; margin-bottom:15px; text-shadow:1px 1px 4px rgba(0,0,0,0.3);}
+.hero-text p { font-size:1.2rem; margin-bottom:20px; }
+.hero button {
+    padding:12px 30px; font-size:1rem; background-color:#ffe4c4; border:none; border-radius:8px; cursor:pointer; font-weight:600;
+    transition:all 0.3s ease;
+}
+.hero button:hover { background-color:#ffd1a3; transform:scale(1.05); box-shadow:0 5px 15px rgba(0,0,0,0.3); }
+
+/* PRODUCTS */
+.products { padding:60px 20px; text-align:center; }
+.section-title { font-size:2rem; margin-bottom:40px; color:#4CAF50; position:relative; }
+.section-title::after { content:''; display:block; width:80px; height:4px; background:#4CAF50; margin:10px auto 0; border-radius:2px; }
+.products-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:25px; }
+.product-card {
+    background:#f0fff0; padding:20px; border-radius:15px; transition:transform 0.3s, box-shadow 0.3s; cursor:pointer;
+    opacity:1; transform:translateY(0);
+}
+.product-card:hover { transform:translateY(-8px) scale(1.03); box-shadow:0 8px 15px rgba(0,0,0,0.2);}
+.product-card h3 { font-size:1.2rem; margin-bottom:8px; color:#4CAF50; }
+.product-card p { font-size:0.95rem; }
+
+/* ABOUT */
+.about { background-color:#f0fff0; padding:60px 20px; }
+.about-container { display:flex; align-items:center; gap:40px; max-width:1200px; margin:auto; flex-wrap:wrap; opacity:0; transform:translateY(30px); transition:all 1s ease; }
+.about-container.show { opacity:1; transform:translateY(0); }
+.about-text { flex:1; }
+
+/* CONTACT */
+.contact { padding:60px 20px; background-color:#f0fff0; text-align:center; }
+.contact button { margin-top:15px; padding:12px 25px; font-size:1rem; border-radius:8px; border:none; background-color:#4CAF50; color:white; cursor:pointer; transition:all 0.3s ease; }
+.contact button:hover { background-color:#45a049; transform:scale(1.05); }
+
+/* FOOTER */
+footer { background-color:#333; color:white; text-align:center; padding:20px 0; }
+
+/* ANIMATIONS */
+@keyframes fadeInUp { 0% {opacity:0; transform:translateY(30px);} 100% {opacity:1; transform:translateY(0);} }
+
+/* RESPONSIVE */
+@media(max-width:992px) { .about-container { flex-direction:column; } }
+@media(max-width:768px) {
+    nav ul { position:fixed; top:0; right:-100%; height:100%; width:60%; background-color:#4CAF50; flex-direction:column; padding-top:60px; gap:30px; transition:right 0.3s ease-in-out;}
+    nav ul.active { right:0; }
+    .hamburger { display:block; }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1 class="logo">Warung Sembako</h1>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#products">Jajanan</a></li>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<section id="home" class="hero">
+    <div class="hero-text">
+        <h2>Selamat Datang di Warung Sembako</h2>
+        <p>Cemilan & jajanan enak, lengkap untuk kebutuhan sehari-hari!</p>
+        <button onclick="orderNow()">Pesan Sekarang</button>
+    </div>
+</section>
+
+<section id="products" class="products">
+    <h2 class="section-title">Jajanan Favorit</h2>
+    <div class="products-grid">
+        <div class="product-card"><h3>Keripik</h3><p>Keripik renyah, rasa gurih alami.</p></div>
+        <div class="product-card"><h3>Kue</h3><p>Kue manis dan legit, cocok untuk camilan.</p></div>
+        <div class="product-card"><h3>Minuman Segar</h3><p>Es teh, es cincau, dan minuman tradisional lainnya.</p></div>
+        <div class="product-card"><h3>Snack Lainnya</h3><p>Berbagai jajanan ringan, camilan harian siap santap.</p></div>
+    </div>
+</section>
+
+<section id="about" class="about">
+    <div class="about-container">
+        <div class="about-text">
+            <h2>Tentang Warung Kami</h2>
+            <p>Warung Sembako menyediakan berbagai jajanan ringan dan kebutuhan sehari-hari sejak 2015. Semua bahan bersih, segar, dan harga terjangkau. Cocok untuk semua usia!</p>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="contact">
+    <h2 class="section-title">Kontak & Pesan</h2>
+    <p><i class="fas fa-map-marker-alt"></i> Jl. Raya Javanaspa, Cidahu, Sukabumi</p>
+    <p><i class="fas fa-phone"></i> 0812-1473-5375 (WhatsApp)</p>
+    <p><i class="fas fa-envelope"></i> warungsembako@gmail.com</p>
+    <button onclick="orderNow()">Pesan via WhatsApp</button>
+</section>
+
+<footer>
+    <p>&copy; 2026 Warung Sembako. All rights reserved.</p>
+</footer>
+
+<script>
+// Hamburger menu toggle
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('nav ul');
+hamburger.addEventListener('click', ()=>{ navLinks.classList.toggle('active'); });
+
+// WhatsApp order
+function orderNow(){ window.open("https://wa.me/6281234567890","_blank"); }
+
+// About container fade-in
+const aboutContainer = document.querySelector('.about-container');
+window.addEventListener('scroll', ()=>{
+    const trigger = window.innerHeight/1.2;
+    const top = aboutContainer.getBoundingClientRect().top;
+    if(top<trigger){ aboutContainer.classList.add('show'); }
+});
+</script>
+
+</body>
+</html>
